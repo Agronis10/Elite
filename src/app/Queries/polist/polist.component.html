@@ -1,0 +1,22 @@
+<!-- <div class="container mt-3" *ngFor="let user of Users"> -->
+<!-- <ul class="list-proup">
+        <li class="list-group-item"  > ID : {{user.id}} </li>
+<li class="list-group-item"  > Name : {{user.name}} </li>
+<li class="list-group-item" >  Email : {{user.email}} </li>
+<li class="list-group-item" >  Phone# : {{user.phone}}</li>
+<li class="list-group-item" >  Street: {{user.address.street}}</li>
+<li class="list-group-item" >  City : {{user.address.city}}</li>
+</ul> -->
+
+<div id="myGrid" class="ag-theme-balham-dark">
+
+<ag-grid-angular 
+    style= "width: 10000px; height: 700px;" 
+    class="ag-theme-balham"
+    [rowData]="pos" 
+    [columnDefs]="columnDefs"
+    >
+</ag-grid-angular>
+</div>
+<!-- <br><br>
+</div> -->

@@ -1,0 +1,23 @@
+
+<div style="margin-bottom: 5px;">
+    <button (click)="ShowPO()">Alert PO</button>
+</div>
+<div style="margin-bottom: 5px;">
+    <button (click)="UpdatePOData()">Update PO</button>
+</div>
+
+<div id="PoEdit" class="ag-theme-balham-dark">
+    
+    <ag-grid-angular 
+        style= "width: 1200px; height: 700px;" 
+        class="ag-theme-balham"
+        [rowData]="PoData" 
+        [columnDefs]="columnDefs"
+        >
+    </ag-grid-angular>
+    </div>
+
+    <div>
+<img src="ItemImage" width="100" height="120">
+
+    </div>
