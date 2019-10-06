@@ -11,6 +11,7 @@ import { POListComponent } from './Queries/polist/polist.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { EditPOComponent } from './edit-po/edit-po.component';
+import {Blob2ImageService} from  './/blob2-image.service'
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     AgGridModule.withComponents([])
   ],
-  providers: [],
+  providers: [Blob2ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

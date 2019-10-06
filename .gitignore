@@ -44,3 +44,11 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+src/app/app.module.ts
+src/app/blob2-image.service.ts
+src/app/edit-po/edit-po.component.html
+src/app/edit-po/edit-po.component.ts
+.gitignore
+src/app/app.module.ts
+src/app/edit-po/edit-po.component.html
+src/app/edit-po/edit-po.component.ts
