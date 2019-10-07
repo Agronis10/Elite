@@ -11,13 +11,14 @@ import { POListComponent } from './Queries/polist/polist.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { EditPOComponent } from './edit-po/edit-po.component';
-import {Blob2ImageService} from  './/blob2-image.service'
+// import {Blob2ImageService} from  './/blob2-image.service'
 
 
 const appRoutes: Routes = [
   {path:'About', component:AboutmeComponent},
   {path:'Description',component:DescriptionPageComponent},
-    
+  {path:'PoList',component:POListComponent},
+  {path:'Po',component:EditPOComponent},
   ]
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     AgGridModule.withComponents([])
   ],
-  providers: [Blob2ImageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

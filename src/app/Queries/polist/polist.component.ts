@@ -48,7 +48,7 @@ GetPOS () {
 
 
 
-return this.HttpClient.get('http://localhost:54530/api/po/5').subscribe( POData=>{this.pos=POData});
+return this.HttpClient.get('http://localhost:54530/api/po').subscribe( POData=>{this.pos=POData});
   // alert (this.PosTmp)
    //console.log(this.PosTmp)
    //this.pos= JSON.parse(Data);
