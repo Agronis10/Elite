@@ -4,6 +4,7 @@ import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import * as moment from 'moment';
 import * as numeral from 'numeral';
 
+
 @Component({
   selector: 'app-polist',
   templateUrl: './polist.component.html',
@@ -12,12 +13,12 @@ import * as numeral from 'numeral';
 export class POListComponent  {
  
   columnDefs = [
-    {headerName: 'PO #', field: 'PONum', sortable: true, filter: true},
+    {headerName: 'PO #', field: 'PO', sortable: true, filter: true},
     {headerName: 'Order Date', field: 'OrderDate',cellRenderer: params => { return moment(params.value).format('YYYY-MM-DD')}, sortable: true, filter: true},
-    {headerName: 'Invoice', field: 'SuppInvoice', sortable: true, filter: true},
-    {headerName: 'Currency', field: 'CurrencyName', sortable: true, filter: true},
+    {headerName: 'Invoice', field: 'Invoice', sortable: true, filter: true},
+    {headerName: 'Currency', field: 'Currency', sortable: true, filter: true},
     {headerName: 'Item Count', field: 'SItemCount', sortable: true, filter: true},
-    {headerName: 'Order Amount', field: 'SLineAmount',cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true}
+    {headerName: 'Order Amount', field: 'LineAmount',cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true}
 ];
 
    
@@ -48,7 +49,7 @@ GetPOS () {
 
 
 
-return this.HttpClient.get('http://localhost:54530/api/po/5').subscribe( POData=>{this.pos=POData});
+return this.HttpClient.get('http://localhost:54530/api/po/main/1013').subscribe( POData=>{this.pos=POData});
   // alert (this.PosTmp)
    //console.log(this.PosTmp)
    //this.pos= JSON.parse(Data);
