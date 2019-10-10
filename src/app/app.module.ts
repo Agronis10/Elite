@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   {path:'About', component:AboutmeComponent},
   {path:'Description',component:DescriptionPageComponent},
   {path:'PoList',component:POListComponent},
-  {path:'Po',component:EditPOComponent},
+  {path:'Po/:id',component:EditPOComponent},
   ]
 @NgModule({
   declarations: [

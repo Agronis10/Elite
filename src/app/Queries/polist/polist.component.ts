@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import * as moment from 'moment';
 import * as numeral from 'numeral';
+import { Router } from '@angular/router';
+import { PoService } from 'src/app/services/po.service';
 
 
 @Component({
@@ -22,40 +24,25 @@ export class POListComponent  {
 ];
 
    
-    pos :any=[];
-  
-  
-     httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            'Authorization': 'my-auth-token',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': 'true' ,
-            'access-control-allow-methods':'GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS'
-          })
-        };
+  pos :any=[];
 
-  constructor(public HttpClient:HttpClient ) { 
+  constructor( private _route:Router , private _poService:PoService ) { 
     
-    this.GetPOS ();
+    this.getPOS ();
   }
 
   ngOnInit() {
   }
 
-GetPOS () {
- 
-//return  this.HttpClient.get('http://jsonplaceholder.typicode.com/users').subscribe(users=>{this.pos=pos});
-
-
-
-return this.HttpClient.get('http://localhost:54530/api/po/main/1013').subscribe( POData=>{this.pos=POData});
-  // alert (this.PosTmp)
-   //console.log(this.PosTmp)
-   //this.pos= JSON.parse(Data);
-  
+getPOS () {
+return this._poService.getPos().subscribe( POData=>{this.pos=POData});
 }
 
+
+openNewPo()
+{
+  this._route.navigateByUrl('Po/-1');
+}
  currencyFormatter(params) {
   return "\xA3" + this.formatNumber(params.value);
 }
@@ -66,4 +53,9 @@ formatNumber(number) {
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 }
 
+
+openPo(event)
+{
+ this._route.navigateByUrl('Po/' + event.data.PO);
+}
 }

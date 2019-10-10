@@ -9,12 +9,13 @@
 </ul> -->
 
 <div id="myGrid" class="ag-theme-balham-dark">
-
+<input type="button" value="New Order" (click)='openNewPo()'/>
 <ag-grid-angular 
     style= "width: 10000px; height: 700px;" 
     class="ag-theme-balham"
     [rowData]="pos" 
     [columnDefs]="columnDefs"
+    (rowDoubleClicked)="openPo($event)"
     >
 </ag-grid-angular>
 </div>

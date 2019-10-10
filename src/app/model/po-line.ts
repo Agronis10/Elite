@@ -15,4 +15,5 @@ export class PoLine {
     public ItemCount:number;
     public BuyingRate:number;
     public LineAmount:number;
+    public State:number;
 }

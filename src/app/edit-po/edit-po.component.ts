@@ -4,6 +4,9 @@ import {HttpClient, HttpParams, HttpHeaders, HttpResponse} from '@angular/common
 import * as moment from 'moment';
 import * as numeral from 'numeral';
 import { Observable, from } from 'rxjs';
+import { PoService } from '../services/po.service';
+import { ActivatedRoute } from '@angular/router';
+import { PoLine } from '../model/po-line';
 // import {Blob2ImageService} from '../blob2-image.service'
  
 @Component({
@@ -32,54 +35,49 @@ export class EditPOComponent implements OnInit {
     {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " (data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11) * data.BuyingRate "}
 ];
 
-PoData:any=[];
+PoData:any;
 imageBlobUrl: any ;
 image :any ;
 
-httpOptions = {
-  headers: new HttpHeaders({
-    'Accept': 'application/json',
-    'responseType':'arraybuffer'
-  })
-};
-thumbnailFetchUrl : string = "http://localhost:54530/api/po/ImageSRC/2000";
-
-  constructor(public HttpClient:HttpClient) { this.GetPOData() }
+  constructor(private _poService:PoService ,private route: ActivatedRoute ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+     this.getPOData(params["id"]) ;});
   }
+   
 
-    GetPOData  () {
-      return this.HttpClient.get('http://localhost:54530/api/po/Details/1013').subscribe( POData=>{this.PoData=POData});
+    getPOData  (id:string) {
+      if(id!="-1")
+      return this._poService.getPoDetails(id).subscribe(POData=>{this.PoData=POData});
+      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=POData});
+
                   }
 
   
-    ShowPO ()
-     {
-      this.HttpClient.get('http://localhost:54530/api/po/ImageSRC/2000',this.httpOptions).subscribe( Img=>{this.imageBlobUrl=Img});
+    // ShowPO ()
+    //  {
+    //   this.HttpClient.get('http://localhost:54530/api/po/ImageSRC/2000',this.httpOptions).subscribe( Img=>{this.imageBlobUrl=Img});
 
-      var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(this.imageBlobUrl)));
-      this.image = 'data:image/jpeg;base64,' + base64String
+    //   var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(this.imageBlobUrl)));
+    //   this.image = 'data:image/jpeg;base64,' + base64String
 
-      console.log(this.imageBlobUrl)
+    //   console.log(this.imageBlobUrl)
 
-    }
-
-    UpdatePOData () 
-    {
-      return this.HttpClient.put  ('http://localhost:54530/api/tbl_008_PO/' +this.PoData ,this.PoData);
-    }
+    // }
 
     
-    createImageFromBlob(image: Blob) {
-      let reader = new FileReader();
-      reader.addEventListener("load", () => {
-        this.imageBlobUrl = reader.result;
-      }, false);
-      if (image) {
-        reader.readAsDataURL(image);
-      }
-    }
+
+    
+    // createImageFromBlob(image: Blob) {
+    //   let reader = new FileReader();
+    //   reader.addEventListener("load", () => {
+    //     this.imageBlobUrl = reader.result;
+    //   }, false);
+    //   if (image) {
+    //     reader.readAsDataURL(image);
+    //   }
+    // }
 
 
 }
