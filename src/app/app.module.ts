@@ -16,8 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule,
-    Reacconst appRoutes: Routes = [
+    FormsModule, Reacconst appRoutes: Routes = [
   {path:'About', component:AboutmeComponent},
   {path:'Description',component:DescriptionPageComponent},
     
