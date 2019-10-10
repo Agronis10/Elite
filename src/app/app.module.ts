@@ -37,8 +37,8 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([]),
-    BrowserAnimationsModule
+    AgGridModule.withComponents([])
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
