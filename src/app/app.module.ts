@@ -11,10 +11,13 @@ import { POListComponent } from './Queries/polist/polist.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { EditPOComponent } from './edit-po/edit-po.component';
-import {Blob2ImageService} from  './/blob2-image.service'
-
-
-const appRoutes: Routes = [
+import {Blob2ImageService} from  './/blob2-image.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    Reacconst appRoutes: Routes = [
   {path:'About', component:AboutmeComponent},
   {path:'Description',component:DescriptionPageComponent},
     
@@ -36,9 +39,10 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    BrowserAnimationsModule
   ],
-  providers: [Blob2ImageService],
+  providers: [    BrowserModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
