@@ -6,5 +6,5 @@ export class Po {
     public SuppInvoice:string;
     public CurrencyName:string;
     public SLineAmount:number;
-    public lines:PoLine[];
+    public POLines:PoLine[];
 }

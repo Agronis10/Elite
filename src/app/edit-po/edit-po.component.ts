@@ -7,8 +7,10 @@ import { Observable, from } from 'rxjs';
 import { PoService } from '../services/po.service';
 import { ActivatedRoute } from '@angular/router';
 import { PoLine } from '../model/po-line';
+import { Po } from '../model/po';
 // import {Blob2ImageService} from '../blob2-image.service'
- 
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @Component({
   selector: 'app-edit-po',
   templateUrl: './edit-po.component.html',
@@ -35,26 +37,34 @@ export class EditPOComponent implements OnInit {
     {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " (data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11) * data.BuyingRate "}
 ];
 
-PoData:any;
+PoData:Po;
 imageBlobUrl: any ;
 image :any ;
 
   constructor(private _poService:PoService ,private route: ActivatedRoute ) { }
-
+id:number;
   ngOnInit() {
     this.route.params.subscribe(params => {
-     this.getPOData(params["id"]) ;});
+this.id=params["id"];
+      this.getPOData() ;});
   }
    
-
-    getPOData  (id:string) {
-      if(id!="-1")
-      return this._poService.getPoDetails(id).subscribe(POData=>{this.PoData=POData});
-      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=POData});
+//.subscribe(POData=>{this.PoData=POData[0].POLines})
+    getPOData  () {
+      if(this.id!= -1 )
+      return this._poService.getPoDetails(this.id).subscribe(POData=>{this.PoData=(POData[0] as Po)});
+      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=(POData[0] as Po)});
 
                   }
 
-  
+                  UpdatePOData()
+                  {
+                    if(this.id!= -1 )
+                     this._poService.updatePO(this.PoData);
+
+                     this._poService.addPo(this.PoData);
+
+                  }
     // ShowPO ()
     //  {
     //   this.HttpClient.get('http://localhost:54530/api/po/ImageSRC/2000',this.httpOptions).subscribe( Img=>{this.imageBlobUrl=Img});
