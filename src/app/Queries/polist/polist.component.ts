@@ -28,17 +28,20 @@ export class POListComponent  {
 
    
   pos :any=[];
-
+  fromDate:Date;
+  toDate:Date;
   constructor( private _route:Router , private _poService:PoService ) { 
     
     //this.getPOS ();
   }
 
   ngOnInit() {
+     
   }
 
-getPOS () {
-return this._poService.getPos().subscribe( POData=>{this.pos=POData});
+ getPos() {
+ 
+ return this._poService.getPos(this.fromDate.toLocaleDateString(),this.toDate.toLocaleDateString()).subscribe( POData=>{this.pos=POData});
 }
 
 
