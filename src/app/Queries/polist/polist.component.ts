@@ -32,7 +32,7 @@ export class POListComponent  {
   toDate:Date;
   constructor( private _route:Router , private _poService:PoService ) { 
     
-     this.getPOS ();
+     //this.getPOS ();
   }
 
   ngOnInit() {
