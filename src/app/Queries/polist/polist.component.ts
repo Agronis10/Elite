@@ -5,6 +5,9 @@ import * as moment from 'moment';
 import * as numeral from 'numeral';
 import { Router } from '@angular/router';
 import { PoService } from 'src/app/services/po.service';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 @Component({
@@ -28,7 +31,7 @@ export class POListComponent  {
 
   constructor( private _route:Router , private _poService:PoService ) { 
     
-    this.getPOS ();
+    //this.getPOS ();
   }
 
   ngOnInit() {

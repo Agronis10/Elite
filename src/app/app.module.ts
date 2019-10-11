@@ -11,7 +11,11 @@ import { POListComponent } from './Queries/polist/polist.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AgGridModule } from 'ag-grid-angular';
 import { EditPOComponent } from './edit-po/edit-po.component';
-// import {Blob2ImageService} from  './/blob2-image.service'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
+import{MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 const appRoutes: Routes = [
@@ -37,8 +41,12 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([])
-    
+    AgGridModule.withComponents([]),
+    MatDatepickerModule,
+    MatNativeDateModule ,
+    MatFormFieldModule ,
+    MatInputModule ,
+    BrowserAnimationsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
