@@ -20,20 +20,28 @@ export class PoService {
 
 public getPoDetails(id)
 {
-  return this.http.get('http://localhost:54530/api/po/Details/' + id);
-  
+ let po:Po;
+ return  this.http.get('http://localhost:54530/api/po/Details/' + id);
   // .subscribe(
   //   data=>{
-  //    (data as PoLine[]).map(element => {
+  //    return  (data as Po);
+  //   //  (data as Po[]).map(element => {
         
-  //     });
-    //}
-  //);
+  //   //   });
+  //   }
+  // );
 }
 
 public updatePO(po:Po)
+{ 
+  this.http.put('http://localhost:54530/api/po'  ,po).subscribe(data=>{});
+}
+
+
+public addPo(po:Po)
 {
-  this.http.put ('http://localhost:54530/api/po/'  ,po);
+  this.http.post('http://localhost:54530/api/po'  ,po).subscribe(data=>{});
+
 }
 
 public getItemsToNewPo()

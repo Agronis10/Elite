@@ -1,17 +1,28 @@
 
-<div style="margin-bottom: 5px;">
+<!-- <div style="margin-bottom: 5px;">
     <button (click)="ShowPO()">Alert PO</button>
-</div>
+</div> -->
 <div style="margin-bottom: 5px;">
-    <button (click)="UpdatePOData()">Update PO</button>
+    <button (click)="UpdatePOData()">Submit</button>
 </div>
 
-<div id="PoEdit" class="ag-theme-balham-dark">
+
+
+<div *ngIf='PoData' id="PoEdit" class="ag-theme-balham-dark">
     
+    Po No. {{PoData.PONum}}
+
+    Order Date {{PoData.OrderDate}}
+
+    Invoice No. {{PoData.SuppInvoice}}
+    <mat-form-field  >
+        <input matInput placeholder="CUrr" [(ngModel)]="PoData.OrderDate">
+      </mat-form-field>
+
     <ag-grid-angular 
         style= "width: 1200px; height: 400px;" 
         class="ag-theme-balham"
-        [rowData]="PoData" 
+        [rowData]="PoData.POLines" 
         [columnDefs]="columnDefs"
         >
     </ag-grid-angular>
