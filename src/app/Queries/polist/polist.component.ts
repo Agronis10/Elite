@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { PoService } from 'src/app/services/po.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -30,6 +30,8 @@ export class POListComponent  {
   pos :any=[];
   fromDate:Date;
   toDate:Date;
+  datePipe = new DatePipe('en-US');
+  QueryParamCorrect : boolean=true;
   constructor( private _route:Router , private _poService:PoService ) { 
     
      //this.getPOS ();
@@ -41,7 +43,24 @@ export class POListComponent  {
 
  getPos() {
  
- return this._poService.getPos(this.fromDate.toLocaleDateString(),this.toDate.toLocaleDateString()).subscribe( POData=>{this.pos=POData});
+  
+  if (this.fromDate == null || this.toDate == null)
+  {
+    this.QueryParamCorrect=false
+    return
+  }
+
+  if (this.fromDate > this.toDate )
+  {
+    this.QueryParamCorrect=false
+    return
+  }
+  this.QueryParamCorrect=true
+  
+  
+ return this._poService.getPos(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd'),this.datePipe.transform(this.toDate, 'yyyy-MM-dd')).subscribe( POData=>{this.pos=POData});
+ 
+ 
 }
 
 
