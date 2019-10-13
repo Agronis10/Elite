@@ -3,8 +3,8 @@ import { PoLine } from './po-line';
 export class Po {
     public PONum:string;
     public OrderDate:Date;
-    public SuppInvoice:string;
-    public CurrencyName:string;
+    public Invoice:string;
+    public Currency:string;
     public SLineAmount:number;
     public POLines:PoLine[];
 }

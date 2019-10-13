@@ -14,8 +14,10 @@ import { EditPOComponent } from './edit-po/edit-po.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatFormFieldModule, MatFormFieldControl} from '@angular/material/form-field';
-import{MatInputModule } from '@angular/material';
+import{MatInputModule , MatSelectModule , MatOptionModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageFormatterComponent } from './image-formatter/image-formatter.component';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 const appRoutes: Routes = [
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
   {path:'Description',component:DescriptionPageComponent},
   {path:'PoList',component:POListComponent},
   {path:'Po/:id',component:EditPOComponent},
+  { path: '',   redirectTo: '/PoList', pathMatch: 'full' }
   ]
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     LoginComponent,
     POListComponent,
-    EditPOComponent
+    EditPOComponent,
+    ImageFormatterComponent,
+    SafeHtmlPipe
     
   ],
   imports: [
@@ -41,10 +46,12 @@ const appRoutes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ImageFormatterComponent]),
     MatDatepickerModule,
     MatNativeDateModule ,
     MatFormFieldModule ,
+    MatSelectModule,
+    MatOptionModule,
     MatInputModule ,
     BrowserAnimationsModule 
   ],

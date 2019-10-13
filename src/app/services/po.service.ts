@@ -11,6 +11,11 @@ export class PoService {
 
   constructor(private http:HttpClient) { }
 
+  public getImage(itemCode:string)
+  {
+    return this.http.get('http://localhost:54530/api/po/ImageSRC/' + itemCode);
+
+  }
 
  public getPos():any
   {
