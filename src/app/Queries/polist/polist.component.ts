@@ -60,7 +60,7 @@ export class POListComponent  {
   }
   this.QueryParamCorrect=true
   
-  
+  debugger;
  return this._poService.getPos(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd'),this.datePipe.transform(this.toDate, 'yyyy-MM-dd')).subscribe( POData=>{this.pos=POData});
  
  

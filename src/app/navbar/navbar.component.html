@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar" *ngIf="_loginService.isLogged">
         <!-- <a class="navbar-brand" href="#">Orders</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
           <div class="navbar-nav"> -->
               <a class="nav-item nav-link active" href="#" routerLink = "/PoList">List <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link " href="#" routerLink = "/Po/-1">New Order <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="#" routerLink = "Description" >Logout</a>
+            <a class="nav-item nav-link" href="#" routerLink = "/Login" >Logout</a>
               <!-- </div>
         </div> -->
       </nav>

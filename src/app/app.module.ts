@@ -24,6 +24,7 @@ const appRoutes: Routes = [
   {path:'About', component:AboutmeComponent},
   {path:'Description',component:DescriptionPageComponent},
   {path:'PoList',component:POListComponent},
+  {path:'Login',component:LoginComponent},
   {path:'Po/:id',component:EditPOComponent},
   { path: '',   redirectTo: '/PoList', pathMatch: 'full' }
   ]
