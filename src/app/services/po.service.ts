@@ -17,9 +17,11 @@ export class PoService {
 
   }
 
- public getPos():any
+ public getPos( OD1:string , OD2:string ):any
   {
-   return this.http.get('http://localhost:54530/api/po/main');
+    
+  
+   return this.http.get('http://localhost:54530/api/po/main/' +  OD1 +'/' + OD2) ;
    
   }
 
