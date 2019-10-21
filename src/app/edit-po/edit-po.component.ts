@@ -38,13 +38,29 @@ disable:boolean;
 columnDefs;
   constructor(private _poService:PoService ,private route: ActivatedRoute , private _currencyService:CurrencyService) { }
 id:number;
+private context;
+private frameworkComponents;
+block:boolean;
+  src:string;
+
+ 
   ngOnInit() {
       this.route.params.subscribe(params => {
       this.id=params["id"];
+      this.context = { componentParent: this };
+      this.frameworkComponents = {
+      
+        imageFormatterRenderer: ImageFormatterComponent
+      };
       //this.GetCurrencies();
       this.getPOData() ;});
   }
   
+  methodFromParent(src) {
+    var modal = document.getElementById("myModal");
+   this.block=true;
+   this.src=src;
+  }
   
   private GetCurrencies() {
     this._currencyService.getCurrency().subscribe(data => {
@@ -61,6 +77,7 @@ id:number;
      {
       this.PONum= "New PO" ; 
       this.OrderDate = moment( Date.now()).format('MM-DD-YYYY') ;
+      
      }
      
      
@@ -79,7 +96,9 @@ id:number;
           
           
           );
-      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=(POData as Po);this.initColumns();});
+      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=(POData as Po);
+        this.PoData.EntityId= localStorage.getItem("currentUser");
+        this.initColumns();});
 
                   }
 
@@ -103,7 +122,7 @@ id:number;
                       cellRendererFramework: ImageFormatterComponent,
                       cellRendererParams:function(params){
                        itemCode:params.data;
-                      }
+                      } 
                     },
                     {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true },
                       {headerName: 'Size 3', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},

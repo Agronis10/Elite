@@ -1,1 +1,7 @@
-<img border="0" width="50" height="50" [src]="'data:image/jpeg;base64,'+params | safeHtml">
+<img border="0" width="50" height="50" (click)='invokeParentMethod()' [src]="'data:image/jpeg;base64,'+params | safeHtml">
+
+
+<!-- Trigger the Modal -->
+<!-- <img id="myImg" src="img_snow.jpg" alt="Snow" style="width:100%;max-width:300px"> -->
+
+<!-- The Modal -->

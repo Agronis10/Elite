@@ -6,5 +6,6 @@ export class Po {
     public Invoice:string;
     public Currency:string;
     public SLineAmount:number;
+    public EntityId:string;
     public POLines:PoLine[];
 }

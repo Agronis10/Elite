@@ -44,9 +44,10 @@ export class POListComponent  {
     
     this.toDate = new Date () ; 
     this.fromDate = new Date(this.toDate.getFullYear(),this.toDate.getMonth() - 1 ,this.toDate.getDate()) ;
-    
+   
   }
 
+  
  getPos() {
  
   
@@ -68,7 +69,6 @@ export class POListComponent  {
  
  
 }
-
 
 openNewPo()
 {
