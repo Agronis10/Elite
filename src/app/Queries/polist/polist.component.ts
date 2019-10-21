@@ -44,7 +44,7 @@ export class POListComponent  {
     
     this.toDate = new Date () ; 
     this.fromDate = new Date(this.toDate.getFullYear(),this.toDate.getMonth() - 1 ,this.toDate.getDate()) ;
-   
+    this.getPos () ; 
   }
 
   
@@ -64,7 +64,7 @@ export class POListComponent  {
   }
   this.QueryParamCorrect=true
   
-  debugger;
+  
  return this._poService.getPos(this.datePipe.transform(this.fromDate, 'yyyy-MM-dd'),this.datePipe.transform(this.toDate, 'yyyy-MM-dd')).subscribe( POData=>{this.pos=POData});
  
  
