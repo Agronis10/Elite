@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { Currency } from '../model/currency';
 import { CurrencyService } from '../services/currency.service';
 import { ImageFormatterComponent } from '../image-formatter/image-formatter.component';
+import { now } from 'moment';
 
 @Component({
   selector: 'app-edit-po',
@@ -26,9 +27,10 @@ export class EditPOComponent implements OnInit {
     return 50;
   };
 
-
-
+  iCurrency :string;
+PONum: String ; 
 PoData:Po;
+OrderDate :string;
 imageBlobUrl: any ;
 image :any ;
 currencies:Currency[];
@@ -37,13 +39,10 @@ columnDefs;
   constructor(private _poService:PoService ,private route: ActivatedRoute , private _currencyService:CurrencyService) { }
 id:number;
   ngOnInit() {
-    this.route.params.subscribe(params => {
-this.id=params["id"];
-      this.GetCurrencies();
+      this.route.params.subscribe(params => {
+      this.id=params["id"];
+      //this.GetCurrencies();
       this.getPOData() ;});
-
-    
-
   }
   
   
@@ -55,12 +54,27 @@ this.id=params["id"];
 
  
     getPOData  () {
+
+      this.iCurrency= "USD" ; 
+
+     if (this.id== -1 ) 
+     {
+      this.PONum= "New PO" ; 
+      this.OrderDate = moment( Date.now()).format('MM-DD-YYYY') ;
+     }
+     
+     
       if(this.id!= -1 )
-      return this._poService.getPoDetails(this.id).subscribe(POData=>
-        {this.PoData=(POData as Po);
-           if (this.PoData.Invoice!=undefined && this.PoData.Invoice!=null&& this.PoData.Invoice!="")
-          this.disable=true;
-         this.initColumns();
+    
+      return this._poService.getPoDetails(this.id).subscribe(POData=>{this.PoData=(POData as Po);
+         
+      if (this.PoData.Invoice!=undefined && this.PoData.Invoice!=null&& this.PoData.Invoice!="")
+      this.disable=true;
+      this.initColumns();
+      
+      this.PONum = this.PoData.PO ; 
+      this.OrderDate = moment( this.PoData.OrderDate).format('MM-DD-YYYY') ;
+
 }
           
           
@@ -75,7 +89,7 @@ this.id=params["id"];
                   {
                     if(this.id!= -1 )
                      this._poService.updatePO(this.PoData);
-
+                    else
                      this._poService.addPo(this.PoData);
 
                   }
@@ -107,4 +121,6 @@ this.id=params["id"];
                   ];
                   }
 
+
+                  
 }

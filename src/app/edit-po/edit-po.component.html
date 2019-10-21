@@ -7,38 +7,27 @@
 
 
 <div *ngIf='PoData' id="PoEdit" class="container header">
-    <div class="row">
-<div class ="col-lg-4">    <b>Po No.</b> {{PoData.PO}}
+<div class ="row">
+<div class ="col-lg-2"><b>Po #:</b> {{PONum}} </div>
+<div class ="col-lg-3"><b>Order Date:</b> {{OrderDate}}</div>
+<div class ="col-lg-2"><b>Invoice # . </b>{{PoData.Invoice}} </div>
+<div class ="col-lg-2"><b>Currency : </b>{{iCurrency}} </div>
+<div class ="col-lg-2"> <b><button (click)="UpdatePOData()" class="btn btn-outline-dark">Submit</button></b></div>
 </div>
-
-<div class ="col-lg-4"><b>Order Date</b> {{PoData.OrderDate}}</div>
-    </div>
-
-    <div class="row">
-    <div class ="col-lg-4">
-  <b>  Invoice No. </b>{{PoData.Invoice}}</div>
-  <div class ="col-lg-4"><b>Currency</b></div>
-    <mat-form-field  >
-        <mat-label>Currency</mat-label>
-        <mat-select [(ngModel)]="PoData.Currency" [disabled]="disable"> 
-          <mat-option *ngFor="let currency of currencies" [value]="currency.Id" >
-            {{currency.CurrencyCode}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class ="col-lg-4">  <button (click)="UpdatePOData()" class="save">Submit</button></div>
-    </div>
-    </div>
+ 
+  
+    
+   
     <!-- <input type='button' (click)='displayImage("2003")' value="save"/>
     <app-image-formatter [image]="image"></app-image-formatter> -->
     <ag-grid-angular 
-        style= "width: 100%; height: 400px;" 
+        style= "width: 1350px; height: 600px;" 
         class="ag-theme-balham"
         [rowData]="PoData.POLines" 
         [columnDefs]="columnDefs"
         [getRowHeight]="getRowHeight"
         >
-    </ag-grid-angular>
+    </ag-grid-angular>;
 
 <!-- 
     <h5>Thumbnail imageBlobUrl</h5>

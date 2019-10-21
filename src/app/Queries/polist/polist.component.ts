@@ -22,9 +22,9 @@ export class POListComponent  {
   columnDefs = [
   
     {headerName: 'PO #', field: 'PO', sortable: true, filter: true},
-    {headerName: 'Order Date', field: 'OrderDate',cellRenderer: params => { return moment(params.value).format('YYYY-MM-DD')}, sortable: true, filter: true},
+    {headerName: 'Order Date', field: 'OrderDate',cellRenderer: params => { return moment(params.value).format('MM-DD-YYYY')}, sortable: true, filter: true},
     {headerName: 'Invoice', field: 'Invoice', sortable: true, filter: true},
-    {headerName: 'Currency', field: 'Currency', sortable: true, filter: true},
+    {headerName: 'Currency', field: 'CurrencyName', sortable: true, filter: true},
     {headerName: 'Item Count', field: 'SItemCount', sortable: true, filter: true},
     {headerName: 'Order Amount', field: 'LineAmount',cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true}
 ];
@@ -41,7 +41,10 @@ export class POListComponent  {
   }
 
   ngOnInit() {
-     
+    
+    this.toDate = new Date () ; 
+    this.fromDate = new Date(this.toDate.getFullYear(),this.toDate.getMonth() - 1 ,this.toDate.getDate()) ;
+    
   }
 
  getPos() {
