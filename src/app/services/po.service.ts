@@ -43,8 +43,8 @@ public getPoDetails(id)
 public updatePO(po:Po) 
 {
 
-    this.http.put <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'}).subscribe(response=>this.res = response.status);
-    return this.res 
+   return this.http.put <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'});
+   // return this.res 
     
 
   }

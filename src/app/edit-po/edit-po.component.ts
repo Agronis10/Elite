@@ -40,8 +40,8 @@ ReturnStatus :number;
 columnDefs;
   constructor(private _poService:PoService ,private route: ActivatedRoute , private _currencyService:CurrencyService) { }
 id:number;
-private context;
-private frameworkComponents;
+  context;
+  frameworkComponents;
 block:boolean;
   src:string;
 
@@ -77,7 +77,7 @@ block:boolean;
 
      if (this.id== -1 ) 
      {
-      this.PONum= "New PO" ; 
+   //   this.PONum= "New PO" ; 
       this.OrderDate = moment( Date.now()).format('MM-DD-YYYY') ;
       
      }
@@ -111,7 +111,7 @@ block:boolean;
                     
                     if(this.id!= -1 )
                     
-                    this.ReturnStatus = this._poService.updatePO(this.PoData);
+                    this._poService.updatePO(this.PoData).subscribe(response=> {debugger;this.ReturnStatus = response.status});
                     else
                      this._poService.addPo(this.PoData);
 

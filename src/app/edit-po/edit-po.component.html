@@ -18,15 +18,17 @@
 
 <div *ngIf='PoData' id="PoEdit" class="container header">
 <div class ="row">
-<div class ="col-lg-2"><b>Po #:</b> {{PONum}} </div>
+<div class ="col-lg-2"><b>Po #:</b> {{PoData.PO}} </div>
 <div class ="col-lg-3"><b>Order Date:</b> {{OrderDate}}</div>
 <div class ="col-lg-2"><b>Invoice # . </b>{{PoData.Invoice}} </div>
 <div class ="col-lg-2"><b>Currency : </b>{{iCurrency}} </div>
 <div class ="col-lg-2"> <b><button (click)="UpdatePOData()" class="btn btn-outline-dark">Submit</button></b></div>
 </div>
 <div *ngIf="ReturnStatus==200"
-class="alert alert-primary"> Update success</div>
+class="alert alert-success"> Update success</div>
   
+<div *ngIf="ReturnStatus==303"
+class="alert alert-error"> Error while save the order.</div>
     
    
     <!-- <input type='button' (click)='displayImage("2003")' value="save"/>
