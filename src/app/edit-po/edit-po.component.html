@@ -24,14 +24,15 @@
 <div class ="col-lg-2"><b>Currency : </b>{{iCurrency}} </div>
 <div class ="col-lg-2"> <b><button (click)="UpdatePOData()" class="btn btn-outline-dark">Submit</button></b></div>
 </div>
- 
+<div *ngIf="ReturnStatus==200"
+class="alert alert-primary"> Update success</div>
   
     
    
     <!-- <input type='button' (click)='displayImage("2003")' value="save"/>
     <app-image-formatter [image]="image"></app-image-formatter> -->
     <ag-grid-angular 
-        style= "width: 100%; height: 600px;" 
+        style= "width: 1250px; height: 600px;" 
         class="ag-theme-balham"
         [rowData]="PoData.POLines" 
         [columnDefs]="columnDefs"

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders, HttpEvent} from '@angular/common/http';
 import { Po } from '../model/po';
 import { PoLine } from '../model/po-line';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class PoService {
-
+  res: number;
   constructor(private http:HttpClient) { }
 
   public getImage(itemCode:string)
@@ -20,7 +21,7 @@ export class PoService {
  public getPos( OD1:string , OD2:string ):any
   {
     
-  debugger;
+  
    return this.http.get('http://localhost:54530/api/po/main/' +  OD1 +'/' + OD2+ '/'+ localStorage.getItem("currentUser")) ;
    
   }
@@ -39,10 +40,14 @@ public getPoDetails(id)
   // );
 }
 
-public updatePO(po:Po)
-{ 
-  this.http.put('http://localhost:54530/api/po'  ,po).subscribe(data=>{});
-}
+public updatePO(po:Po) 
+{
+
+    this.http.put <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'}).subscribe(response=>this.res = response.status);
+    return this.res 
+    
+
+  }
 
 
 public addPo(po:Po)

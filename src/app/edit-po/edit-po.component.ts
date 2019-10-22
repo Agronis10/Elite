@@ -15,6 +15,7 @@ import { CurrencyService } from '../services/currency.service';
 import { ImageFormatterComponent } from '../image-formatter/image-formatter.component';
 import { now } from 'moment';
 
+
 @Component({
   selector: 'app-edit-po',
   templateUrl: './edit-po.component.html',
@@ -35,6 +36,7 @@ imageBlobUrl: any ;
 image :any ;
 currencies:Currency[];
 disable:boolean;
+ReturnStatus :number;
 columnDefs;
   constructor(private _poService:PoService ,private route: ActivatedRoute , private _currencyService:CurrencyService) { }
 id:number;
@@ -106,8 +108,10 @@ block:boolean;
                   
                   UpdatePOData()
                   {
+                    
                     if(this.id!= -1 )
-                     this._poService.updatePO(this.PoData);
+                    
+                    this.ReturnStatus = this._poService.updatePO(this.PoData);
                     else
                      this._poService.addPo(this.PoData);
 
