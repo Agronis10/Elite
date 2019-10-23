@@ -52,7 +52,7 @@ public updatePO(po:Po)
 
 public addPo(po:Po)
 {
-  this.http.post('http://localhost:54530/api/po'  ,po).subscribe(data=>{});
+  return this.http.post <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'});
 
 }
 
