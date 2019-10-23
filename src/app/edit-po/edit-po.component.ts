@@ -113,7 +113,7 @@ block:boolean;
                     
                     this._poService.updatePO(this.PoData).subscribe(response=> {debugger;this.ReturnStatus = response.status});
                     else
-                     this._poService.addPo(this.PoData);
+                     this._poService.addPo(this.PoData).subscribe(response=> {debugger;this.ReturnStatus = response.status});
 
                   }
   
