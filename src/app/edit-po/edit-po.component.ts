@@ -111,7 +111,11 @@ block:boolean;
                     
                     if(this.id!= -1 )
                     
-                    this._poService.updatePO(this.PoData).subscribe(response=> {debugger;this.ReturnStatus = response.status});
+                    this._poService.updatePO(this.PoData).subscribe(
+                      response=> {debugger;this.ReturnStatus = response.status},
+                      err => {this.ReturnStatus = err.status},
+                      
+                      );
                     else
                      this._poService.addPo(this.PoData).subscribe(response=> {debugger;this.ReturnStatus = response.status});
 
