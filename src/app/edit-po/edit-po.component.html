@@ -26,10 +26,18 @@
 </div>
 <div *ngIf="ReturnStatus==200"
 class="alert alert-success"> Update success</div>
-  
-<div *ngIf="ReturnStatus==303"
+   -->
+ <div *ngIf="ReturnStatus==400"
 class="alert alert-error"> Error while save the order.</div>
-    
+<!--
+<div  *ngIf="ReturnStatus==200" class="alert alert-danger alert-dismissible fade in">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  Error while save the order.
+</div>
+<div  *ngIf="ReturnStatus==400" class="alert alert-success alert-dismissible fade in">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    Update success.
+  </div>-->
    
     <!-- <input type='button' (click)='displayImage("2003")' value="save"/>
     <app-image-formatter [image]="image"></app-image-formatter> -->
