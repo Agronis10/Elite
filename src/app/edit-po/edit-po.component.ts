@@ -132,7 +132,9 @@ block:boolean;
                        itemCode:params.data;
                       } 
                     },
-                    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true },
+                    //    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true , cellRenderer: function(params) {
+                    //     return '<a href=\'bill/' + params.data.id + '\'></a>';
+                    // }},
                       {headerName: 'Size 3', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},
                       {headerName: 'Size 4', field: 'Unit_4',width:80,editable: !this.disable, sortable: true,valueParser: "Number(newValue)", filter: true,type: "valueColumn"},
                       {headerName: 'Size 5', field: 'Unit_5',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},

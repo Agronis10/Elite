@@ -31,23 +31,29 @@ export class ImageFormatterComponent implements ICellRendererAngularComp  {
     }
   constructor(private _poService:PoService) { }
 
-
+description:string;
 
 
   agInit(param) {
-    this.params2=param;
-    this._poService.getImage(param.data.ItemCode).subscribe(data=>{
-      this.params=data;
+     this.params2=param;
+     this.description=param.data.ItemDescription;
+    // this._poService.getImage(param.data.ItemCode).subscribe(data=>{
+    //   this.params=data;
 
       
-    });
+    // });
 
   //  this.params=param.itemCode;
    }
  
 
    public invokeParentMethod() {
-    this.params2.context.componentParent.methodFromParent(this.params);
+    this._poService.getImage( this.params2.data.ItemCode).subscribe(data=>{
+      // this.params=data;
+      this.params2.context.componentParent.methodFromParent(data);
+
+      
+    });
 }
 
 

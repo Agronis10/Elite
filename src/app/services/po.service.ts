@@ -14,8 +14,8 @@ export class PoService {
 
   public getImage(itemCode:string)
   {
-    return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/ImageSRC/' + itemCode);
-    //return this.http.get('http://localhost:54530/api/po/ImageSRC/' + itemCode);
+    //return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/ImageSRC/' + itemCode);
+    return this.http.get('http://localhost:54530/api/po/ImageSRC/' + itemCode);
 
   }
 
@@ -23,16 +23,16 @@ export class PoService {
   {
     
   
-   return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/main/' +  OD1 +'/' + OD2+ '/'+ localStorage.getItem("currentUser")) ;
-   //return this.http.get('http://localhost:54530/api/po/main/' +  OD1 +'/' + OD2+ '/'+ localStorage.getItem("currentUser")) ;
+   //return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/main/' +  OD1 +'/' + OD2+ '/'+ localStorage.getItem("currentUser")) ;
+   return this.http.get('http://localhost:54530/api/po/main/' +  OD1 +'/' + OD2+ '/'+ localStorage.getItem("currentUser")) ;
    
   }
 
 public getPoDetails(id)
 {
  let po:Po;
- //return  this.http.get('http://localhost:54530/api/po/Details/' + id);
- return  this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/Details/' + id);
+ return  this.http.get('http://localhost:54530/api/po/Details/' + id);
+ //return  this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/Details/' + id);
   // .subscribe(
   //   data=>{
   //    return  (data as Po);
@@ -46,8 +46,8 @@ public getPoDetails(id)
 public updatePO(po:Po) 
 {
 
-   return this.http.put <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
-   //return this.http.put <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'});
+   //return this.http.put <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
+   return this.http.put <Response> ('http://localhost:54530/api/po'  ,po,{observe: 'response'});
    
    // return this.res 
     
@@ -58,9 +58,8 @@ public updatePO(po:Po)
 public addPo(po:Po)
 {
 
- // return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
-
-  return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
+  return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
+  //return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
 
 
 }
@@ -68,7 +67,7 @@ public addPo(po:Po)
 public getItemsToNewPo()
 {
   
-  //return this.http.get('http://localhost:54530/api/po/InitDetails/' + localStorage.getItem("currentUser") );
-  return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/Details/' + localStorage.getItem("currentUser") );
+  return this.http.get('http://localhost:54530/api/po/InitDetails/' + localStorage.getItem("currentUser") );
+  //return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/InitDetails/' + localStorage.getItem("currentUser") );
 }
 }
