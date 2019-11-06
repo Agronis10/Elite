@@ -19,7 +19,7 @@ export class ImageFormatterComponent implements ICellRendererAngularComp  {
 
   params: any;
   params2: any;
-  
+  src:string;
   ngOnInit(): void {
    // this.params=this.image;
   }
@@ -32,11 +32,13 @@ export class ImageFormatterComponent implements ICellRendererAngularComp  {
   constructor(private _poService:PoService) { }
 
 description:string;
-
+path:string;
 
   agInit(param) {
      this.params2=param;
+     this.path="../assets/Image/Items";
      this.description=param.data.ItemDescription;
+     this.src=this.path + "/" +  param.data.ItemCode +'.jpg';
     // this._poService.getImage(param.data.ItemCode).subscribe(data=>{
     //   this.params=data;
 
@@ -50,7 +52,7 @@ description:string;
    public invokeParentMethod() {
     this._poService.getImage( this.params2.data.ItemCode).subscribe(data=>{
       // this.params=data;
-      this.params2.context.componentParent.methodFromParent(data);
+      this.params2.context.componentParent.methodFromParent(this.src);
 
       
     });

@@ -9,7 +9,8 @@
     <span (click)="block=false" class="close">&times;</span>
   
     <!-- Modal Content (The Image) -->
-    <img *ngIf="src" class="modal-content" id="img01" [src]="'data:image/jpeg;base64,'+src | safeHtml">
+    <!-- [src]="'data:image/jpeg;base64,'+src | safeHtml" -->
+    <img *ngIf="src" class="modal-content" id="img01" [src]="src">
   
     <!-- Modal Caption (Image Text) -->
     <div id="caption"></div>
@@ -47,9 +48,9 @@ class="alert alert-dan"> Error while save the order.</div>
         class="ag-theme-balham"
         [rowData]="PoData.POLines" 
         [columnDefs]="columnDefs"
-        [getRowHeight]="getRowHeight"
         [context]="context"
         [frameworkComponents]="frameworkComponents"
+        [getRowHeight]="getRowHeight"
         >
     </ag-grid-angular>;
 

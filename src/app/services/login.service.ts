@@ -14,7 +14,8 @@ export class LoginService {
 
   login(userName:string, password:string)
   {
-    return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/login/' + userName+"/"+password);
+    //return this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/login/' + userName+"/"+password);
+    return this.http.get('http://localhost:54530/api/login/' + userName+"/"+password);
   }
   
 

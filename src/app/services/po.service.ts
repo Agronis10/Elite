@@ -32,7 +32,7 @@ public getPoDetails(id)
 {
  let po:Po;
  return  this.http.get('http://localhost:54530/api/po/Details/' + id);
- //return  this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/Details/' + id);
+//return  this.http.get('https://www.elitedistribution.soccer/EliteAPI/api/po/Details/' + id);
   // .subscribe(
   //   data=>{
   //    return  (data as Po);
@@ -58,8 +58,8 @@ public updatePO(po:Po)
 public addPo(po:Po)
 {
 
-  return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
-  //return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
+  //return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
+  return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
 
 
 }
