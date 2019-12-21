@@ -44,11 +44,15 @@ id:number;
   frameworkComponents;
 block:boolean;
   src:string;
-
- 
+type:string;
+ comTypeName:string;
   ngOnInit() {
       this.route.params.subscribe(params => {
+        debugger;
       this.id=params["id"];
+      this.type=params["type"];
+ 
+
       this.context = { componentParent: this };
       this.frameworkComponents = {
       
@@ -86,21 +90,28 @@ block:boolean;
       if(this.id!= -1 )
     
       return this._poService.getPoDetails(this.id).subscribe(POData=>{this.PoData=(POData as Po);
-         
+    
       if (this.PoData.Invoice!=undefined && this.PoData.Invoice!=null&& this.PoData.Invoice!="")
       this.disable=true;
-      this.initColumns();
+      debugger;
+      this.initColumns(this.PoData.ComType);
       
       this.PONum = this.PoData.PO ; 
       this.OrderDate = moment( this.PoData.OrderDate).format('MM-DD-YYYY') ;
-
+     this.comTypeName= this.getComTypeName(this.PoData.ComType);
+     
+        
 }
           
           
           );
-      return this._poService.getItemsToNewPo().subscribe(POData=>{this.PoData=(POData as Po);
+      return this._poService.getItemsToNewPo(this.type).subscribe(POData=>{this.PoData=(POData as Po);
         this.PoData.EntityId= localStorage.getItem("currentUser");
-        this.initColumns();});
+ 
+       this.PoData.ComType= this.type;
+       debugger;
+       this.comTypeName= this.getComTypeName(this.PoData.ComType);
+        this.initColumns(this.PoData.ComType);});
 
                   }
 
@@ -122,34 +133,122 @@ block:boolean;
                   }
   
 
-                  initColumns()
+                  initColumns(type)
                   {
-                    this. columnDefs = [
+                    switch(type)
+                    {
 
-                      {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true ,
-                      cellRendererFramework: ImageFormatterComponent,
-                      cellRendererParams:function(params){
-                       itemCode:params.data;
-                      } 
-                    },
-                    //    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true , cellRenderer: function(params) {
-                    //     return '<a href=\'bill/' + params.data.id + '\'></a>';
-                    // }},
-                      {headerName: 'Size 3', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},
-                      {headerName: 'Size 4', field: 'Unit_4',width:80,editable: !this.disable, sortable: true,valueParser: "Number(newValue)", filter: true,type: "valueColumn"},
-                      {headerName: 'Size 5', field: 'Unit_5',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 6', field: 'Unit_6',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 7', field: 'Unit_7',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 8', field: 'Unit_8',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 9', field: 'Unit_9',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 10', field: 'Unit_10',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Size 11', field: 'Unit_11',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
-                      {headerName: 'Item Count', field: 'ItemCount', aggFunc: "sum", width:120, sortable: true, filter: true,valueParser: "Number(newValue)",type: "valueColumn",valueGetter: " data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11" },
-                      {headerName: 'Unit Price', field: 'BuyingRate',width:120,cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueParser: "Number(newValue)"},
-                      {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " (data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11) * data.BuyingRate "}
-                  ];
+                      case "1":
+                        this. columnDefs = [
+
+                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          cellRendererFramework: ImageFormatterComponent,
+                          cellRendererParams:function(params){
+                           itemCode:params.data;
+                          } 
+                        },
+                        //    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true , cellRenderer: function(params) {
+                        //     return '<a href=\'bill/' + params.data.id + '\'></a>';
+                        // }},
+                          {headerName: 'Size 3', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},
+                          {headerName: 'Size 4', field: 'Unit_4',width:80,editable: !this.disable, sortable: true,valueParser: "Number(newValue)", filter: true,type: "valueColumn"},
+                          {headerName: 'Size 5', field: 'Unit_5',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 6', field: 'Unit_6',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 7', field: 'Unit_7',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 8', field: 'Unit_8',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 9', field: 'Unit_9',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 10', field: 'Unit_10',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 11', field: 'Unit_11',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Item Count', field: 'ItemCount', aggFunc: "sum", width:120, sortable: true, filter: true,valueParser: "Number(newValue)",type: "valueColumn",valueGetter: " data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11" },
+                          {headerName: 'Unit Price', field: 'BuyingRate',width:120,cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueParser: "Number(newValue)"},
+                          {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " (data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11) * data.BuyingRate "}
+                      ];
+                      break;
+
+                      case "2":
+                        this. columnDefs = [
+
+                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          cellRendererFramework: ImageFormatterComponent,
+                          cellRendererParams:function(params){
+                           itemCode:params.data;
+                          } 
+                        },
+                        //    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true , cellRenderer: function(params) {
+                        //     return '<a href=\'bill/' + params.data.id + '\'></a>';
+                        // }},
+                          {headerName: 'Size 12', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},
+                          {headerName: 'Size 14', field: 'Unit_4',width:80,editable: !this.disable, sortable: true,valueParser: "Number(newValue)", filter: true,type: "valueColumn"},
+                          {headerName: 'Size 16', field: 'Unit_5',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 18', field: 'Unit_6',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size S', field: 'Unit_7',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size M', field: 'Unit_8',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size L', field: 'Unit_9',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size XL', field: 'Unit_10',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size XXL', field: 'Unit_11',width:100,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Item Count', field: 'ItemCount', aggFunc: "sum", width:120, sortable: true, filter: true,valueParser: "Number(newValue)",type: "valueColumn",valueGetter: " data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11" },
+                          {headerName: 'Unit Price', field: 'BuyingRate',width:120,cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueParser: "Number(newValue)"},
+                          {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " (data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11) * data.BuyingRate "}
+                      ];
+                      break;
+
+                      case "3":
+                        this. columnDefs = [
+
+                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          cellRendererFramework: ImageFormatterComponent,
+                          cellRendererParams:function(params){
+                           itemCode:params.data;
+                          } 
+                        },
+                        //    {headerName: 'Item ', field: 'ItemDescription',width:100, sortable: true, filter: true , cellRenderer: function(params) {
+                        //     return '<a href=\'bill/' + params.data.id + '\'></a>';
+                        // }},
+                          {headerName: 'Size 3', field: 'Unit_3',width:80,editable: !this.disable ,valueParser: "Number(newValue)", sortable: true, filter: true,type: "valueColumn"},
+                          {headerName: 'Size 4', field: 'Unit_4',width:80,editable: !this.disable, sortable: true,valueParser: "Number(newValue)", filter: true,type: "valueColumn"},
+                          {headerName: 'Size 5', field: 'Unit_5',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 6', field: 'Unit_6',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 7', field: 'Unit_7',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 8', field: 'Unit_8',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 9', field: 'Unit_9',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 10', field: 'Unit_10',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Size 11', field: 'Unit_11',width:80,editable: !this.disable, sortable: true, filter: true,type: "valueColumn",valueParser: "Number(newValue)"},
+                          {headerName: 'Item Count', field: 'ItemCount', aggFunc: "sum", width:120, sortable: true, filter: true,valueParser: "Number(newValue)",type: "valueColumn",valueGetter: " data.Unit_3 + data.Unit_4 + data.Unit_5 + data.Unit_6 + data.Unit_7 + data.Unit_8 + data.Unit_9 + data.Unit_10 + data.Unit_11" },
+                          {headerName: 'Unit Price', field: 'BuyingRate',width:120,cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueParser: "Number(newValue)"},
+                          {headerName: 'Order Amount', field: 'LineAmount',aggFunc: "sum", allowedAggFuncs: ['sum','min','max'],width:120, cellRenderer: params => { return numeral(params.value).format('0,00.00')}, sortable: true, filter: true,valueGetter: " 0.00"}
+                      ];
+                      break;
+
+
+                    }
+                 
+
+
+
                   }
 
 
+
+                  getComTypeName(ComType)
+                  {
+                    switch(ComType)
+                    {
+                      case "1": 
+                      {
+                      return   "Gloves";
+                        break;
+                      }
+                      case "2": 
+                      {
+                        return  "Clothing";
+                        break;
+                      }
+                      case "3": 
+                      {
+                        return  "SponsorShip";
+                        break;
+                      }
+                    }
+                  }
                   
 }

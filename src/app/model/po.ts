@@ -7,5 +7,6 @@ export class Po {
     public Currency:string;
     public SLineAmount:number;
     public EntityId:string;
+    public ComType:string;
     public POLines:PoLine[];
 }
