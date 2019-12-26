@@ -141,7 +141,7 @@ type:string;
                       case "1":
                         this. columnDefs = [
 
-                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          {headerName: 'Item ', field: 'ItemDescription',width:300, sortable: true, filter: true ,
                           cellRendererFramework: ImageFormatterComponent,
                           cellRendererParams:function(params){
                            itemCode:params.data;
@@ -168,7 +168,7 @@ type:string;
                       case "2":
                         this. columnDefs = [
 
-                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          {headerName: 'Item ', field: 'ItemDescription',width:300, sortable: true, filter: true ,
                           cellRendererFramework: ImageFormatterComponent,
                           cellRendererParams:function(params){
                            itemCode:params.data;
@@ -195,7 +195,7 @@ type:string;
                       case "3":
                         this. columnDefs = [
 
-                          {headerName: 'Item ', field: 'ItemDescription',width:150, sortable: true, filter: true ,
+                          {headerName: 'Item ', field: 'ItemDescription',width:300, sortable: true, filter: true ,
                           cellRendererFramework: ImageFormatterComponent,
                           cellRendererParams:function(params){
                            itemCode:params.data;
