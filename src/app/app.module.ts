@@ -18,6 +18,7 @@ import{MatInputModule , MatSelectModule , MatOptionModule} from '@angular/materi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageFormatterComponent } from './image-formatter/image-formatter.component';
 import { SafeHtmlPipe } from './safe-html.pipe';
+import { TestComponent } from './test/test.component';
 
 
 const appRoutes: Routes = [
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     POListComponent,
     EditPOComponent,
     ImageFormatterComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    TestComponent
     
   ],
   imports: [

@@ -58,8 +58,8 @@ public updatePO(po:Po)
 public addPo(po:Po)
 {
 
-  //return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
-  return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
+  return this.http.post <Response> ('http://localhost:54530/api/po' ,po, {observe: 'response'});
+  //return this.http.post <Response> ('https://www.elitedistribution.soccer/EliteAPI/api/po'  ,po,{observe: 'response'});
 
 
 }
