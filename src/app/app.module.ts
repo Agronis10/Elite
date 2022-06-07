@@ -27,6 +27,7 @@ const appRoutes: Routes = [
   {path:'PoList',component:POListComponent},
   {path:'Login',component:LoginComponent},
   {path:'Po/:id',component:EditPOComponent},
+  {path:'Po/:id/:type',component:EditPOComponent},
   { path: '',   redirectTo: '/PoList', pathMatch: 'full' }
   ]
 @NgModule({
